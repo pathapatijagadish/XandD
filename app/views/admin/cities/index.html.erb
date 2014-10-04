@@ -1,0 +1,41 @@
+<div class="bodyCnt">
+  <div class="wraper">
+    <div id="inner-main">
+      <div class="subNavCnt">
+        <h1>Cities</h1>
+        <div class="moreLinks">
+          <ul>
+            <li>
+              <%= link_to 'New city', new_admin_city_path %>
+            </li>
+          </ul>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <table class="cmsTable">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Banner</th>
+          <th colspan="3"></th>
+        </tr>
+        <% @cities.each do |city| %>
+          <tr>
+            <td><%= city.name %></td>
+            <td><%= city.description %></td>
+            <td><%= image_tag(city.avatar.url) %></td>
+            <td>
+              <%= link_to 'Show', admin_city_path(city) %><br>
+              <%= link_to 'Edit', edit_admin_city_path(city) %><br>
+              <%= link_to 'Destroy', admin_city_path(city), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <br/>
+      <br/>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="clear"></div>
+</div>

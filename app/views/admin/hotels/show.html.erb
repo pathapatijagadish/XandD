@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @hotel.name %>
+</p>
+
+<p>
+  <strong>Extreme luxury:</strong>
+  <%= @hotel.extreme_luxury %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @hotel.address %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @hotel.description %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @hotel.phone_number %>
+</p>
+
+<p>
+  <strong>Checkin:</strong>
+  <%= @hotel.checkin %>
+</p>
+
+<p>
+  <strong>Checkout:</strong>
+  <%= @hotel.checkout %>
+</p>
+
+<p>
+  <strong>Facilities:</strong>
+  <%= @hotel.facilities %>
+</p>
+
+<p>
+  <strong>Room types:</strong>
+  <%= @hotel.room_types %>
+</p>
+
+<p>
+  <strong>Usp:</strong>
+  <%= @hotel.usp %>
+</p>
+
+<p>
+  <strong>Things to do:</strong>
+  <%= @hotel.things_to_do %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @hotel.rating %>
+</p>
+
+<%= link_to 'Edit', edit_admin_hotel_path(@hotel) %> |
+<%= link_to 'Back', admin_hotels_path %>

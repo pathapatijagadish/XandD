@@ -1,0 +1,124 @@
+<div class='bodyCnt'>
+  <div class='wraper'>
+    <div id='inner-main'>
+      
+      <div class='subNavCnt'>
+        <h1>New Activity</h1>
+        <div class='moreLinks'>
+          <ul>
+            <li>
+              <%= link_to "Back" ,admin_activities_path %>
+            </li>
+          </ul>
+        </div>
+        <div class='clear'></div>
+      </div>
+
+      <%= nested_form_for([:admin,@activity],:html=>{:multipart =>true} ) do |f| %>
+        <div class='sectionCnt'>
+          <div class='formLayout'>
+            
+            <div class='row'>
+              <%= f.label :name %>
+              <div class='inputCnt'>
+                <%= f.text_field :name,:size=>30 %>
+              </div>
+              <div class='clear'></div>
+            </div>
+            
+            <div class='row'>
+              <%= f.label :avatar %>
+              <div class='inputCnt'>
+                <%= f.file_field :avatar %>1024 x 363 pixels)
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="activity_description"><%= f.label :description %></label>
+                <div class='inputCnt'>
+                  <%= f.text_area :description , rows: 20%>
+                </div>
+              <div class='clear'></div>
+            </div>
+            
+            <div class='row'>
+              <label for="activity_prices"><%= f.label :price %></label>
+              <div class='inputCnt'>
+                <%= f.text_field :price %>
+                <script type="text/javascript">
+                  //<![CDATA[
+                  (function() { if (typeof CKEDITOR != 'undefined') { CKEDITOR.replace('activity_prices', {"uiColor":"#26A8A6","height":"300"}); } else { setTimeout(arguments.callee, 50); } })();
+                  //]]>
+                </script>
+              </div>
+              <div class='clear'></div>
+            </div>
+            
+            <div class='row'>
+              <label for="activity_timings"><%= f.label :timing %></label>
+              <div class='inputCnt'>
+                <%= f.text_field :timing %>
+                  <script type="text/javascript">
+                  //<![CDATA[
+                  (function() { if (typeof CKEDITOR != 'undefined') { CKEDITOR.replace('activity_timings', {"uiColor":"#26A8A6","height":"300"}); } else { setTimeout(arguments.callee, 50); } })();
+                  //]]>
+                  </script>
+                </div>
+              <div class='clear'></div>
+            </div>
+            
+            <div class='row'>
+              <label for="activity_ratings"><%= f.label :rating %></label>
+              <div class='inputCnt'>
+                <%= f.number_field :rating %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class="row">
+              <%= f.fields_for :images do |image_form| %>
+                <%= image_tag(image_form.object.avatar.url,size: "50x46") if image_form.object.avatar.present? %>
+                <p>
+                  <%= image_form.label :avatar %>
+                  <%= image_form.file_field :avatar %>
+                  <%= image_form.link_to_remove "Remove this image" ,:class => "remove_link" %>
+                </p>
+                <br/>
+              <% end %>
+              <p>
+                <%= f.link_to_add "Add a image", :images , :class => "btn adminAddPhoto"%>
+              </p>
+            </div>
+
+            <div class='clear'></div>
+            <hr class='seprator'>
+
+            <div class="row">
+              <%= f.fields_for :videos do |video_form| %>
+                <p>
+                  <%= video_form.label :video_link %>
+                  <%= video_form.text_field :video_link ,placeholder: 'Enter Video Url Here..',size: 20,class: 'video_link' %>
+                </p>
+                  <%= video_form.link_to_remove "Remove this video",:class => "remove_link" %>
+                <br/>
+              <% end %>
+              <p>
+                <%= f.link_to_add "Add a video", :videos, :class => "btn adminAddPhoto" %>
+              </p>
+            </div>
+            
+            <div class='submitBtn'>
+              <%= f.submit %>
+            </div>
+
+          <% end %>
+          <style>
+            .cke_reset_all{display:none;}
+          </style>
+        </div>
+    </div>
+    <div class='clear'></div>
+  </div>
+  <div class='clear'></div>
+</div>

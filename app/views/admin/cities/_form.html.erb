@@ -1,0 +1,149 @@
+<div class='bodyCnt'>
+  <div class='wraper'>
+    <div id='inner-main'>
+      
+      <div class='subNavCnt'>
+        <h1>New City</h1>
+        <div class='moreLinks'>
+          <ul>
+            <li>
+              <% link_to "Back" , admin_cities_path %>
+            </li>
+          </ul>
+        </div>
+        <div class='clear'></div>
+      </div>
+
+      <%= nested_form_for([:admin,@city],:html=>{:multipart =>true} ) do |f| %>
+        <div class='sectionCnt'>
+          <div class='formLayout'>
+            
+            <div class='row'>
+              <label for="city_name"><%= f.label :name %></label>
+              <div class='inputCnt'>
+                <%= f.text_field :name %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="city_banner"><%= f.label :banner %></label>
+              <div class='inputCnt'>
+                <%= f.file_field :banner %>
+                (1024 x 363 pixels)
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="city_description"><%= f.label :description %></label>
+              <div class='inputCnt'>
+                <%= f.text_area :name , rows: 20 %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="city_Destination"><%= f.label :destination %></label>
+              <div class='inputCnt'>
+                <%= f.select :destination, ["North Island","South Island"] %>
+                <option value="2">South Island</option></select>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+
+            <div class="row">
+              <%= f.fields_for :attractions do |attraction| %>
+                <p>
+                  <%= attraction.label :attraction ,:style => "margin-left: 10px;" %>
+                  <span> <%= f.select :destination, ["North Island","South Island"] %></span>
+                  <%= attraction.link_to_remove "Remove Attraction" ,:class => "remove_link",:style=>"margin-left: 110px;"%>
+                </p>
+                <br/>
+              <% end %>
+              <p>
+                <%= f.link_to_add "Add Attraction", :attractions , :class => "btn adminAddPhoto" %>
+              </p>
+            </div>
+            <div class='clear'></div>
+            <hr class='seprator'>
+
+            <div class='row'>
+              <div class='row'>
+                <label for="city_activity">Activity</label>
+                <div class='inputCnt'>
+                  <select id="city_activity_ids_" name="city[activity_ids][]">
+                  <option value="">Select Activity</option>
+                  <option value="3">NZone Sky Dive</option>
+                </div>
+                <input id="destroy" name="destroy" type="hidden" />
+                <input id="city__destroy" name="city[_destroy]" type="hidden" /><a href="javascript:void(0)" class="remove_link" onClick="remove_fields(this)">Delete</a>
+              </div>
+              <div class='clear'></div>
+              <script>
+                $(function(){
+                
+                  $(".remove_link").on('click', function() {
+                    city_id = "";
+                    activity_id = $("#destroy").val();
+                    $.ajax({
+                        url: "/cities/delete_assoc.js",
+                        type: "post",
+                        data: { city_id : city_id, activity_id : activity_id }
+                     });
+                  });
+                });
+              </script>
+
+              <a class="btn adminAddPhoto" href="#" onclick="add_image_fields(this, &quot;{association}&quot;, &quot;&lt;div class=\&#x27;row\&#x27;&gt;\n&lt;label for=\&quot;city_city_activity\&quot;&gt;Activity&lt;\/label&gt;\n&lt;div class=\&#x27;inputCnt\&#x27;&gt;\n&lt;select id=\&quot;city_activity_ids_\&quot; name=\&quot;city[activity_ids][]\&quot;&gt;&lt;option value=\&quot;\&quot;&gt;Select Activity&lt;\/option&gt;&lt;option value=\&quot;3\&quot;&gt;NZone Sky Dive&lt;\/option&gt;\n&lt;option value=\&quot;6\&quot;&gt;Bungy - AJ Hackett&lt;\/option&gt;\n&lt;option value=\&quot;7\&quot;&gt;Ziptrek Queenstown&lt;\/option&gt;\n&lt;option value=\&quot;8\&quot;&gt;Shotover Jet &lt;\/option&gt;\n&lt;option value=\&quot;9\&quot;&gt;OGO&lt;\/option&gt;\n&lt;option value=\&quot;10\&quot;&gt;Kaitaki Adventures&lt;\/option&gt;\n&lt;option value=\&quot;11\&quot;&gt;Waitomo Glowworm Caves&lt;\/option&gt;\n&lt;option value=\&quot;12\&quot;&gt;Sky Jump/Walk&lt;\/option&gt;\n&lt;option value=\&quot;13\&quot;&gt;Agroventures&lt;\/option&gt;\n&lt;option value=\&quot;14\&quot;&gt;Polynesian Spa&lt;\/option&gt;\n&lt;option value=\&quot;15\&quot;&gt;Te Puia Experience Rotorua&lt;\/option&gt;\n&lt;option value=\&quot;16\&quot;&gt;Glacier Explorer Mt.Cook&lt;\/option&gt;\n&lt;option value=\&quot;17\&quot;&gt;Skydive Auckland&lt;\/option&gt;\n&lt;option value=\&quot;18\&quot;&gt;Taupo Skydive&lt;\/option&gt;\n&lt;option value=\&quot;19\&quot;&gt;Safari of the Scenes - Wakatipu&lt;\/option&gt;\n&lt;option value=\&quot;20\&quot;&gt;Milford Sound Coach &amp;amp; Cruise - Real Journeys&lt;\/option&gt;\n&lt;option value=\&quot;21\&quot;&gt;The Helicopter Line Queenstown&lt;\/option&gt;\n&lt;option value=\&quot;22\&quot;&gt;FlyBoard&lt;\/option&gt;\n&lt;option value=\&quot;23\&quot;&gt;Southern Discoveries&lt;\/option&gt;\n&lt;option value=\&quot;24\&quot;&gt;Doubtful Sound Wilderness Cruises&lt;\/option&gt;\n&lt;option value=\&quot;26\&quot;&gt;Shotover Canyon Swing&lt;\/option&gt;&lt;\/select&gt;\n&lt;!-- = f.select(\&quot;activity_ids\&quot;, Activity.all.collect{|a| [a.name, a.id]}, :prompt =&gt; \&quot;Select Activity\&quot;) --&gt;\n&lt;\/div&gt;\n&lt;input id=\&quot;destroy\&quot; name=\&quot;destroy\&quot; type=\&quot;hidden\&quot; /&gt;\n&lt;input id=\&quot;city_city__destroy\&quot; name=\&quot;city[city][_destroy]\&quot; type=\&quot;hidden\&quot; /&gt;&lt;a href=\&quot;javascript:void(0)\&quot; class=\&quot;remove_link\&quot; onClick=\&quot;remove_fields(this)\&quot;&gt;Delete&lt;\/a&gt;\n&lt;\/div&gt;\n&lt;div class=\&#x27;clear\&#x27;&gt;&lt;\/div&gt;\n&lt;script&gt;\n  $(function(){\n  \n    $(\&quot;.remove_link\&quot;).on(\&#x27;click\&#x27;, function() {\n     city_id = \&quot;\&quot;;\n      activity_id = $(\&quot;#destroy\&quot;).val();\n      $.ajax({\n          url: \&quot;/cities/delete_assoc.js\&quot;,\n          type: \&quot;post\&quot;,\n          data: { city_id : city_id, activity_id : activity_id }\n       });\n    });\n  });\n&lt;\/script&gt;\n&quot;); return false;">add more activities</a>
+            </div>
+            <div class='clear'></div>
+            <hr class='seprator'>
+
+            <div class='row'>
+              <div class='row'>
+                <label for="city_hotel">Hotel</label>
+                <div class='inputCnt'>
+                  <select id="city_hotel_ids_" name="city[hotel_ids][]"><option value="">Select Hotel</option><option value="4">Heritage Auckland</option>
+                    <option value="5">SKYCITY Grand Hotel</option>
+                  </select>
+                </div>
+                <input id="destroy" name="destroy" type="hidden" />
+                <input id="city__destroy" name="city[_destroy]" type="hidden" /><a href="javascript:void(0)" class="remove_link" onClick="remove_fields(this)">Delete</a>
+              </div>
+              <div class='clear'></div>
+              <script>
+                $(function(){
+
+                  $(".remove_link").on('click', function() {
+                    city_id = "";
+                    hotel_id = $("#destroy").val();
+                    $.ajax({
+                        url: "/cities/delete_assoc.js",
+                        type: "post",
+                        data: { city_id : city_id, hotel_id : hotel_id }
+                     });
+                  });
+                });
+              </script>
+
+              <a class="btn adminAddPhoto" href="#" onclick="add_image_fields(this, &quot;{association}&quot;, &quot;&lt;div class=\&#x27;row\&#x27;&gt;\n&lt;label for=\&quot;city_city_hotel\&quot;&gt;Hotel&lt;\/label&gt;\n&lt;div class=\&#x27;inputCnt\&#x27;&gt;\n&lt;select id=\&quot;city_hotel_ids_\&quot; name=\&quot;city[hotel_ids][]\&quot;&gt;&lt;option value=\&quot;\&quot;&gt;Select Hotel&lt;\/option&gt;&lt;option value=\&quot;4\&quot;&gt;Heritage Auckland&lt;\/option&gt;\n&lt;option value=\&quot;5\&quot;&gt;SKYCITY Grand Hotel&lt;\/option&gt;\n&lt;option value=\&quot;6\&quot;&gt;SKYCITY Hotel&lt;\/option&gt;\n&lt;option value=\&quot;7\&quot;&gt;Sudima Auckland Airport&lt;\/option&gt;\n&lt;option value=\&quot;8\&quot;&gt;Copthorne Hotel Auckland HarbourCity&lt;\/option&gt;\n&lt;option value=\&quot;9\&quot;&gt;Mercure Auckland&lt;\/option&gt;\n&lt;option value=\&quot;10\&quot;&gt;Copthorne Hotel and Resort Bay of Islands&lt;\/option&gt;\n&lt;option value=\&quot;11\&quot;&gt;Sea Spray Suites&lt;\/option&gt;\n&lt;option value=\&quot;12\&quot;&gt;The Waterfront Suites Bay of Islands - Heritage Boutique Collection&lt;\/option&gt;\n&lt;option value=\&quot;13\&quot;&gt;Pacific Harbour Lodge&lt;\/option&gt;\n&lt;option value=\&quot;14\&quot;&gt;Peppers on the Point - Lake Rotorua&lt;\/option&gt;\n&lt;option value=\&quot;15\&quot;&gt;Novotel Rotorua Lakeside&lt;\/option&gt;\n&lt;option value=\&quot;16\&quot;&gt;Millennium Hotel Rotorua&lt;\/option&gt;\n&lt;option value=\&quot;17\&quot;&gt;InterContinental Wellington&lt;\/option&gt;\n&lt;option value=\&quot;18\&quot;&gt;Sudima Lake Rotorua&lt;\/option&gt;\n&lt;option value=\&quot;19\&quot;&gt;CQ Quality Hotel Wellington&lt;\/option&gt;\n&lt;option value=\&quot;20\&quot;&gt;Peppers Clearwater Resort&lt;\/option&gt;\n&lt;option value=\&quot;21\&quot;&gt;Sudima Christchurch Airport&lt;\/option&gt;\n&lt;option value=\&quot;23\&quot;&gt;Novotel Christchurch Cathedral Square&lt;\/option&gt;\n&lt;option value=\&quot;24\&quot;&gt;Peppers Bluewater Resort&lt;\/option&gt;\n&lt;option value=\&quot;26\&quot;&gt;The White Morph - Heritage Boutique Collection&lt;\/option&gt;\n&lt;option value=\&quot;27\&quot;&gt;Lake Tekapo Scenic Resort&lt;\/option&gt;\n&lt;option value=\&quot;28\&quot;&gt;Grand Mercure Nelson Monaco&lt;\/option&gt;\n&lt;option value=\&quot;29\&quot;&gt;Peppers Awaroa Lodge&lt;\/option&gt;\n&lt;option value=\&quot;30\&quot;&gt;Heritage Queenstown&lt;\/option&gt;\n&lt;option value=\&quot;31\&quot;&gt;Peppers Beacon&lt;\/option&gt;\n&lt;option value=\&quot;33\&quot;&gt;Millennium Hotel Queenstown&lt;\/option&gt;\n&lt;option value=\&quot;34\&quot;&gt;Eagles Nest&lt;\/option&gt;\n&lt;option value=\&quot;35\&quot;&gt;Matakauri Lodge&lt;\/option&gt;\n&lt;option value=\&quot;36\&quot;&gt;Fiordland Lodge&lt;\/option&gt;\n&lt;option value=\&quot;37\&quot;&gt;Huka Lodge&lt;\/option&gt;\n&lt;option value=\&quot;38\&quot;&gt;Blanket Bay&lt;\/option&gt;\n&lt;option value=\&quot;39\&quot;&gt;The Lodge at Kauri Cliffs&lt;\/option&gt;\n&lt;option value=\&quot;40\&quot;&gt;Azur Luxury Villas&lt;\/option&gt;\n&lt;option value=\&quot;41\&quot;&gt;Hapuku Lodge &amp;amp; Tree Houses&lt;\/option&gt;\n&lt;option value=\&quot;42\&quot;&gt;Whare Kea Lodge &amp;amp; Chalet&lt;\/option&gt;\n&lt;option value=\&quot;44\&quot;&gt;BUSHLAND PARK LODGE AND RETREAT&lt;\/option&gt;&lt;\/select&gt;\n&lt;!-- = f.select(\&quot;hotel_ids\&quot;, Hotel.all.collect{|a| [a.name, a.id]}, :prompt =&gt; \&quot;Select Hotel\&quot;) --&gt;\n&lt;\/div&gt;\n&lt;input id=\&quot;destroy\&quot; name=\&quot;destroy\&quot; type=\&quot;hidden\&quot; /&gt;\n&lt;input id=\&quot;city_city__destroy\&quot; name=\&quot;city[city][_destroy]\&quot; type=\&quot;hidden\&quot; /&gt;&lt;a href=\&quot;javascript:void(0)\&quot; class=\&quot;remove_link\&quot; onClick=\&quot;remove_fields(this)\&quot;&gt;Delete&lt;\/a&gt;\n&lt;\/div&gt;\n&lt;div class=\&#x27;clear\&#x27;&gt;&lt;\/div&gt;\n&lt;script&gt;\n  $(function(){\n  \n    $(\&quot;.remove_link\&quot;).on(\&#x27;click\&#x27;, function() {\n     city_id = \&quot;\&quot;;\n      hotel_id = $(\&quot;#destroy\&quot;).val();\n      $.ajax({\n          url: \&quot;/cities/delete_assoc.js\&quot;,\n          type: \&quot;post\&quot;,\n          data: { city_id : city_id, hotel_id : hotel_id }\n       });\n    });\n  });\n&lt;\/script&gt;\n&quot;); return false;">add more hotels</a>
+            </div>
+            <div class='clear'></div>
+          </div>
+        </div>
+        <div class='submitBtn'>
+          <input name="commit" type="submit" value="Save" />
+        </div>
+      <% end %>
+
+      <style>
+        .cke_reset_all{display:none;}
+      </style>
+    </div>
+  </div>
+  <div class='clear'></div>
+</div>
+<div class='clear'></div>
+</div>

@@ -1,0 +1,37 @@
+<div class="bodyCnt">
+  <div class="wraper">
+    <div id="inner-main">
+      <div class="subNavCnt">
+        <h1>Banner</h1>
+        <div class="moreLinks">
+          <ul>
+            <li>
+              <%= link_to 'New Banner', new_admin_banner_path %>
+            </li>
+          </ul>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <table class="cmsTable">
+        <tr>
+          <th>Banner</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% @banners.each do |banner| %>
+          <tr>
+            <td><%= image_tag banner.avatar.url %></td>
+            <td>
+              <%= link_to 'Edit', edit_admin_banner_path(banner) %>
+            </td>
+            <td><%= link_to 'Destroy', admin_banner_path(banner), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </table>
+      <br/>
+      <br/>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="clear"></div>
+</div>

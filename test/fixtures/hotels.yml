@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  extreme_luxury: false
+  address: MyText
+  description: MyText
+  phone_number: MyString
+  checkin: MyString
+  checkout: MyString
+  facilities: MyText
+  room_types: MyText
+  usp: MyText
+  things_to_do: MyString
+  rating: 1
+
+two:
+  name: MyString
+  extreme_luxury: false
+  address: MyText
+  description: MyText
+  phone_number: MyString
+  checkin: MyString
+  checkout: MyString
+  facilities: MyText
+  room_types: MyText
+  usp: MyText
+  things_to_do: MyString
+  rating: 1

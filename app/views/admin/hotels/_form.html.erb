@@ -1,0 +1,174 @@
+<div class='bodyCnt'>
+  <div class='wraper'>
+    <div id='inner-main'>
+
+      <div class='subNavCnt'>
+        <h1>New Hotel</h1>
+        <div class='moreLinks'>
+          <ul>
+            <li>
+              <% link_to "Back", admin_hotels_path %>
+            </li>
+          </ul>
+        </div>
+        <div class='clear'></div>
+      </div>
+
+      <%= nested_form_for([:admin,@hotel],:html=>{:multipart =>true} ) do |f| %>
+        <div class='sectionCnt'>
+          <div class='formLayout'>
+
+            <div class='row'>
+              <label for="hotel_name">Name</label>
+              <div class='inputCnt'>
+                <input id="hotel_name" name="hotel[name]" size="30" type="text" />
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_extreme_luxury"><%= f.label :extreme_luxury %></label>
+              <div class='inputCnt'>
+                <%= f.check_box :extreme_luxury %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :address %></label>
+              <div class='inputCnt'>
+                <%= f.text_area :address %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :banner %></label>
+              <div class='inputCnt'>
+                <%= f.file_field :banner %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :description %></label>
+              <div class='inputCnt'>
+                <%= f.text_area :description %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :phone_number %></label>
+              <div class='inputCnt'>
+                <%= f.text_field :phone_number %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :checkin %></label>
+              <div class='inputCnt'>
+                <%= f.text_field :checkin %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :checkout %></label>
+              <div class='inputCnt'>
+                <%= f.text_field :checkout %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :facilities %></label>
+              <div class='inputCnt'>
+                <%= f.text_area :facilities %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :room_types %></label>
+              <div class='inputCnt'>
+                <%= f.text_area :room_types %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :usp %></label>
+              <div class='inputCnt'>
+                <%= f.text_area :usp %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :things_to_do %></label>
+              <div class='inputCnt'>
+                <%= f.text_area :things_to_do %>
+              </div>
+              <div class='clear'></div>
+            </di
+
+            <div class='row'>
+              <label for="hotel_address"><%= f.label :rating %></label>
+              <div class='inputCnt'>
+                <%= f.text_area :rating %>
+              </div>
+              <div class='clear'></div>
+            </div>
+
+            <div class="row">
+              <%= f.fields_for :images do |image_form| %>
+                <%= image_tag(image_form.object.avatar.url,size: "50x46") if image_form.object.avatar.present? %>
+                <p>
+                  <%= image_form.label :avatar %>
+                  <%= image_form.file_field :avatar %>
+                  <%= image_form.link_to_remove "Remove this image" %>
+                </p>
+                <br/>
+              <% end %>
+              <p>
+                <%= f.link_to_add "Add a image", :images %>
+              </p>
+            </div>
+
+            <div class='clear'></div>
+            <hr class='seprator'>
+
+            <div class="row">
+              <%= f.fields_for :videos do |video_form| %>
+                <p>
+                  <%= video_form.label :video_link %>
+                  <%= video_form.text_field :video_link ,placeholder: 'Enter Video Url Here..',size: 20,class: 'video_link' %>
+                </p>
+                  <%= video_form.link_to_remove "Remove this video" %>
+                <br/>
+              <% end %>
+              <p>
+                <%= f.link_to_add "Add a video URL", :videos %>
+              </p>
+            </div>
+            <div class='clear'></div>
+
+            <div class='submitBtn'>
+              <%= f.submit %>
+            </div>
+          </div>
+        </div>    
+      <% end %>
+
+      <style>
+        .cke_reset_all{display:none;}
+      </style>
+
+    </div>
+  </div>
+  <div class='clear'></div>
+</div>
+
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>XD</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application','data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="cms-container">
+
+      <div class="header">
+        <div class="wraper">
+        <div class="adminInfo">
+        Logged in as:
+        admin@travelxd.com
+        |
+        <a href="/users/sign_out" data-method="delete" rel="nofollow">Logout</a>
+        </div>
+        <div class="top-header">
+        <a href="http://x-d.in/" style="float:left">
+        <img src="/assets/main_logo.png">
+        </a>
+        </div>
+        <div class="clear"></div>
+        </div>
+      </div>
+
+      <div class="mainNav boxLink">
+        <div class="wraper">
+          <ul class="mainMenu">
+          <li>
+            <%= link_to "Home Banners" ,admin_banners_path%>
+          </li>
+          <li>
+          <%= link_to "Activities" ,admin_activities_path%>
+          </li>
+          <li>
+          <%= link_to "Hotels" ,admin_hotels_path%>
+          </li>
+          <li>
+          <%= link_to "Cities" ,admin_cities_path%>
+          </li>
+          </ul>
+          <div class="clear"></div>
+          </div>
+      </div>
+      <div class="clear"></div>
+      <%= yield %>
+    </div>
+  </body>
+</html>
